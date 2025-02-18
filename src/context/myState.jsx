@@ -18,6 +18,7 @@ function MyState(props) {
       }
   }
   
+
   return (
     <MyContext.Provider value={{mode, toggleMode, loading, setLoading}}>
        {props.children}
