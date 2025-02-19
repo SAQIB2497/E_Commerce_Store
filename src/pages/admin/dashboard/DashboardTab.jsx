@@ -17,6 +17,10 @@ function DashboardTab() {
   function openModal() {
     setIsOpen(true);
   }
+
+  const add = () => {
+    window.location.href= ("/addproduct")
+  }
   return (
     <>
       <div className="container mx-auto">
@@ -74,7 +78,7 @@ function DashboardTab() {
                     }}
                   >
                     {" "}
-                    <div className="flex gap-2 items-center">
+                    <div onClick={add} className="flex gap-2 items-center">
                       Add Product <FaCartPlus size={20} />
                     </div>
                   </button>

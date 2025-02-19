@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   BrowserRouter as Router,
   Route,
@@ -18,23 +17,6 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import AddProduct from "./pages/admin/pages/AddProduct";
 import UpdateProduct from "./pages/admin/pages/UpdateProduct";
-=======
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-import Home from "./pages/home/Home";
-import Order from "./pages/order/Order";
-import Cart from "./pages/cart/Cart";
-import Dashboard from "./pages/admin/dashboard/Dashboard";
-import NoPage from "./pages/nopage/NoPage";
-import MyState from "./context/myState";
-import Login from "./pages/registration/Login";
-import Signup from "./pages/registration/Signup";
-import ProductInfo from "./pages/productInfo/ProductInfo";
-import AddProduct from "./pages/admin/pages/AddProduct";
-import UpdateProduct from "./pages/admin/pages/UpdateProduct";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
->>>>>>> 2abf12d4c53d6f0348c682b8774e6c3a436b6d3a
 
 function App() {
   return (
@@ -42,7 +24,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-<<<<<<< HEAD
           <Route path="/order" element={
             <ProtectedRoutes>
               <Order />
@@ -89,22 +70,3 @@ export const ProtectedRoutesForAdmin = ({children}) => {
     return <Navigate to='/login' />
   }
 }
-=======
-          <Route path="/order" element={<Order />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/productinfo/:id" element={<ProductInfo />} />
-          <Route path="/addproduct" element={<AddProduct />} />
-          <Route path="/updateproduct" element={<UpdateProduct />} />
-          <Route path="/*" element={<NoPage />} />
-        </Routes>
-        <ToastContainer />
-      </Router>
-    </MyState>
-  );
-}
-
-export default App;
->>>>>>> 2abf12d4c53d6f0348c682b8774e6c3a436b6d3a
