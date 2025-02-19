@@ -37,6 +37,8 @@ function Cart() {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
+  
+
   return (
     <Layout>
       <div
@@ -48,7 +50,7 @@ function Cart() {
       >
         <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
         <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0 ">
-          <div className="rounded-lg md:w-2/3 h-[400px] overflow-y-auto">
+          <div className="rounded-lg md:w-2/3 h-[500px] overflow-y-auto">
             {cartItems.map((item, index) => {
               return (
                 <div

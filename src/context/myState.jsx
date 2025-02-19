@@ -140,12 +140,19 @@ function MyState(props) {
     }
   };
 
+  const [searchkey, setSearchkey] = useState("");
+  const [filterType, setFilterType] = useState("");
+  const [filterPrice, setFilterPrice] = useState("");
+
   return (
     <MyContext.Provider
       value={{
         mode,
+        searchkey,
+        setSearchkey,
         toggleMode,
         loading,
+        filterType,
         setLoading,
         product,
         products,
@@ -154,6 +161,9 @@ function MyState(props) {
         editHandle,
         updateProduct,
         deleteProduct,
+        setFilterType,
+        filterPrice,
+        setFilterPrice,
       }}
     >
       {props.children}
