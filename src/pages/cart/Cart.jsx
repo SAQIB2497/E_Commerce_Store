@@ -130,7 +130,7 @@ function Cart() {
                 className="text-gray-700"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                ₹{totalAmount}
+                Pkr {totalAmount}
               </p>
             </div>
             <div className="flex justify-between">
@@ -144,7 +144,7 @@ function Cart() {
                 className="text-gray-700"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                ₹{shipping}
+                Pkr {shipping}
               </p>
             </div>
             <hr className="my-4" />
@@ -160,7 +160,7 @@ function Cart() {
                   className="mb-1 text-lg font-bold"
                   style={{ color: mode === "dark" ? "white" : "" }}
                 >
-                  ₹{grandTotal}
+                  Pkr {grandTotal}
                 </p>
               </div>
             </div>
