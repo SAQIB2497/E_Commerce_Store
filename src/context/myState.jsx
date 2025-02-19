@@ -5,9 +5,12 @@ import {
   Timestamp,
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
+  setDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 
@@ -15,6 +18,7 @@ function MyState(props) {
   const [mode, setMode] = useState("light");
   const [loading, setLoading] = useState(false);
 
+  // ********************** Toggle mode Section  **********************
   const toggleMode = () => {
     if (mode === "light") {
       setMode("dark");
@@ -25,6 +29,7 @@ function MyState(props) {
     }
   };
 
+  // ********************** Initilizing product Section  **********************
   const [products, setProducts] = useState({
     title: null,
     price: null,
@@ -39,7 +44,7 @@ function MyState(props) {
     }),
   });
 
-  // ********************** Add Product Section  **********************
+  // ********************** Add Product in firebase Section  **********************
   const addProduct = async () => {
     if (
       products.title == null ||
@@ -57,7 +62,7 @@ function MyState(props) {
       toast.success("Product Add successfully");
       setTimeout(() => {
         window.location.href = "/dashboard";
-      }, 5000);
+      }, 3000);
       getProductData();
       closeModal();
       setLoading(false);
@@ -70,7 +75,7 @@ function MyState(props) {
 
   const [product, setProduct] = useState([]);
 
-  // ****** get product
+  // ********************** Get Product from firebase Section  **********************
   const getProductData = async () => {
     setLoading(true);
     try {
@@ -98,6 +103,43 @@ function MyState(props) {
     getProductData();
   }, []);
 
+  // ********************** Edit Product Section  **********************
+  const editHandle = (item) => {
+    setProducts(item);
+  };
+
+  // ********************** Update Product Section  **********************
+  const updateProduct = async (item) => {
+    setLoading(true);
+    try {
+      await setDoc(doc(fireDB, "products", products.id), products);
+      toast.success("Product Updated successfully");
+      getProductData();
+      setLoading(false);
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 3000);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+    setProducts("");
+  };
+
+  // ********************** Delete Product Section  **********************
+  const deleteProduct = async (item) => {
+    setLoading(false);
+    try {
+      await deleteDoc(doc(fireDB, "products", item.id));
+      toast.success("Product Deleted successfully");
+      setLoading(false);
+      getProductData();
+    } catch (error) {
+      // toast.success('Product Deleted Falied')
+      setLoading(false);
+    }
+  };
+
   return (
     <MyContext.Provider
       value={{
@@ -109,6 +151,9 @@ function MyState(props) {
         products,
         setProducts,
         addProduct,
+        editHandle,
+        updateProduct,
+        deleteProduct,
       }}
     >
       {props.children}

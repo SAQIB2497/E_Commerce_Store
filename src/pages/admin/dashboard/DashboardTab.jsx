@@ -4,13 +4,11 @@ import myContext from "../../../context/myContext";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaUser, FaCartPlus } from "react-icons/fa";
 import { AiFillShopping } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 function DashboardTab() {
   const context = useContext(myContext);
-  const { mode, product } = context;
-
-  console.log(product);
-
+  const { mode, product, editHandle, deleteProduct } = context;
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -21,11 +19,12 @@ function DashboardTab() {
     setIsOpen(true);
   }
 
-  const add = () => {
+  const goToAdd = () => {
     window.location.href = "/addproduct";
   };
+
   return (
-    <>
+    <div>
       <div className="container mx-auto">
         <div className="tab container mx-auto ">
           <Tabs defaultIndex={0} className=" ">
@@ -72,19 +71,21 @@ function DashboardTab() {
                   Product Details
                 </h1>
                 <div className=" flex justify-end">
-                  <button
-                    type="button"
-                    className="focus:outline-none text-white bg-pink-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.6)] border hover:bg-pink-700 outline-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
-                    style={{
-                      backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
-                      color: mode === "dark" ? "white" : "",
-                    }}
-                  >
-                    {" "}
-                    <div onClick={add} className="flex gap-2 items-center">
-                      Add Product <FaCartPlus size={20} />
-                    </div>
-                  </button>
+                  <div onClick={goToAdd}>
+                    <button
+                      type="button"
+                      className="focus:outline-none text-white bg-pink-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.6)] border hover:bg-pink-700 outline-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+                      style={{
+                        backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
+                        color: mode === "dark" ? "white" : "",
+                      }}
+                    >
+                      {" "}
+                      <div className="flex gap-2 items-center">
+                        Add Product <FaCartPlus size={20} />
+                      </div>
+                    </button>
+                  </div>
                 </div>
                 <div className="relative overflow-x-auto ">
                   <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400  ">
@@ -120,7 +121,7 @@ function DashboardTab() {
                       </tr>
                     </thead>
                     {product.map((item, index) => {
-                      const {title, price, imageUrl, category, description, date} = item;
+                      const { title, price, imageUrl, category, date } = item;
                       return (
                         <tbody className="">
                           <tr
@@ -135,17 +136,13 @@ function DashboardTab() {
                               className="px-6 py-4 text-black "
                               style={{ color: mode === "dark" ? "white" : "" }}
                             >
-                              {index + 1}
+                              {index + 1}.
                             </td>
                             <th
                               scope="row"
                               className="px-6 py-4 font-medium text-black whitespace-nowrap"
                             >
-                              <img
-                                className="w-16"
-                                src={imageUrl}
-                                alt="img"
-                              />
+                              <img className="w-16" src={imageUrl} alt="img" />
                             </th>
                             <td
                               className="px-6 py-4 text-black "
@@ -157,7 +154,7 @@ function DashboardTab() {
                               className="px-6 py-4 text-black "
                               style={{ color: mode === "dark" ? "white" : "" }}
                             >
-                              {price}
+                              ₹{price}
                             </td>
                             <td
                               className="px-6 py-4 text-black "
@@ -179,7 +176,7 @@ function DashboardTab() {
                                     color: mode === "dark" ? "white" : "",
                                   }}
                                 >
-                                  <div>
+                                  <div onClick={() => deleteProduct(item)}>
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
                                       fill="none"
@@ -195,22 +192,24 @@ function DashboardTab() {
                                       />
                                     </svg>
                                   </div>
-                                  <div>
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      strokeWidth={1.5}
-                                      stroke="currentColor"
-                                      className="w-6 h-6"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                                      />
-                                    </svg>
-                                  </div>
+                                  <Link to={'/updateproduct'}>
+                                    <div onClick={() => editHandle(item)}>
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="w-6 h-6"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                                        />
+                                      </svg>
+                                    </div>
+                                  </Link>
                                 </div>
                               </div>
                             </td>
@@ -459,7 +458,7 @@ function DashboardTab() {
           </Tabs>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
