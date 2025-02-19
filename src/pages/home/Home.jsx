@@ -14,7 +14,7 @@ function Home() {
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart);
 
-  // console.log(cartItem);
+  console.log(cartItem);
 
   const addCart = () => {
     dispatch(addToCart("shirt"));
@@ -23,6 +23,7 @@ function Home() {
   const deleteCart = () => {
     dispatch(deleteFromCart("shirt"));
   };
+
   return (
     <Layout>
       {/* <div className="flex gap-5 justify-center">
@@ -36,9 +37,9 @@ function Home() {
       <HeroSection />
       <Filter />
       <ProductCard />
-      <div className="flex justify-center -mt-10 mb-4">
+      <div className="flex justify-center mt-4 mb-8 sm:mb-12 lg:mb-16">
         <Link to={"/allproducts"}>
-          <button className=" bg-gray-300 px-5 py-2 rounded-xl">
+          <button className="bg-gray-300 px-5 py-2 rounded-xl">
             See more
           </button>
         </Link>
