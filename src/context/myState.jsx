@@ -57,7 +57,7 @@ function MyState(props) {
       toast.success("Product Add successfully");
       setTimeout(() => {
         window.location.href = "/dashboard";
-      }, 4000);
+      }, 5000);
       getProductData();
       closeModal();
       setLoading(false);
@@ -75,7 +75,7 @@ function MyState(props) {
     setLoading(true);
     try {
       const q = query(
-        collection(fireDb, "products"),
+        collection(fireDB, "products"),
         orderBy("time")
         // limit(5)
       );
@@ -105,6 +105,7 @@ function MyState(props) {
         toggleMode,
         loading,
         setLoading,
+        product,
         products,
         setProducts,
         addProduct,
